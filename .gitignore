@@ -1,0 +1,8 @@
+my_settings.py
+
+db.sqlite
+
+__pycache__
+
+*.pyc
+
