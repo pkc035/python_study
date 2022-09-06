@@ -51,6 +51,9 @@ class SaveThumbnailsTest2(unittest.TestCase):
 
         self.assertEqual(data, filename.read_bytes())
 
+# 예외가 발생하는 동작도 테스트로 확인
+# 기대하는 예외 클래스를 지정하고, 예외가 발생하는 처리를 with 안에서 실행
+
 class GetBooksTest(unittest.TestCase):
     def test_get_books_no_connection(self):
         from booksearch.core import get_books
