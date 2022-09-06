@@ -19,7 +19,7 @@ class Book:
 
             ext = imghdr.what(None, h=thumbnail)
 
-            base = pathlib.Path() / f'{self.id}_{kind}'
+            base = pathlib.Path(prefix) / f'{self.id}_{kind}'
             filename = base.with_suffix(f'.{ext}')
             filename.write_bytes(thumbnail)
             paths.append(filename)
@@ -28,4 +28,6 @@ class Book:
 def get_books(q, **params):
     params['q'] = q
     data = get_json(params)
+    for item in data['items']:
+        print(item)
     return [Book(item) for item in data['items']]
