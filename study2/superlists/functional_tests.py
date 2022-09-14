@@ -31,7 +31,11 @@ class NewVisitorTest(unittest.TestCase):
 
         table = self.browser.find_element(By.ID,'id_list_table')
         rows = table.find_elements(By.TAG_NAME, 'tr')
-        self.assertTrue(any(row.text == '1: 공작깃털 사기' for row in rows), "신규 작업이 테이블에 표시되지 않는다.")
+        # self.assertTrue(any(row.text == '1: 공작깃털 사기' for row in rows), 
+        # "신규 작업이 테이블에 표시되지 않는다. -- 해당 텍스트:\n%s" %(table.text,
+        # ))
+
+        self.assertIn('1: 공작깃털 사기', [row.text for row in rows])
 
         self.fail('Finish the test!')
 
