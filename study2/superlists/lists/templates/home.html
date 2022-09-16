@@ -6,7 +6,7 @@
         <h1>Your To-Do list</h1>
         <form method="POST">
             <input name="item_text" id="id_new_item" placeholder="작업 아이템 입력" />
-            {% csrf_token %}
+            {% comment %} {% csrf_token %} {% endcomment %}
         </form>
         {% comment %} <input id="id_new_item" placeholder="작업 아이템 입력" /> {% endcomment %}
         <table id="id_list_table">
