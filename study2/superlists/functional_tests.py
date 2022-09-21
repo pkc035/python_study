@@ -5,6 +5,8 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by   import By
 from webdriver_manager.chrome       import ChromeDriverManager
 
+from django.test import LiveServerTestCase
+
 
 
 class NewVisitorTest(unittest.TestCase):
@@ -17,7 +19,7 @@ class NewVisitorTest(unittest.TestCase):
         self.browser.quit()
     
     def test_can_start_a_list_and_retrieve_it_later(self):
-        self.browser.get('http://127.0.0.1:8000')
+        self.browser.get(self.live_server_url)
         self.assertIn('To-Do', self.browser.title)
         header_text = self.browser.find_element(By.TAG_NAME,"h1").text
         print(header_text)
@@ -29,6 +31,10 @@ class NewVisitorTest(unittest.TestCase):
         inputbox.send_keys('공작깃털 사기')
         inputbox.send_keys(Keys.ENTER)
 
+        edith_list_url = self.browser.current_url
+        self.assertRegex(edith_list_url, '/lists/.+')
+        self.check_for_row_in_list_table('1:공작깃털 사기')
+
         table = self.browser.find_element(By.ID,'id_list_table')
         rows = table.find_elements(By.TAG_NAME, 'tr')
         # self.assertTrue(any(row.text == '1: 공작깃털 사기' for row in rows), 
@@ -39,5 +45,5 @@ class NewVisitorTest(unittest.TestCase):
 
         self.fail('Finish the test!')
 
-if __name__  == '__main__':
-    unittest.main(warnings='ignore')
+# if __name__  == '__main__':
+#     unittest.main(warnings='ignore')
